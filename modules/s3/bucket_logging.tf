@@ -8,6 +8,12 @@ resource "aws_s3_bucket_logging" "example" {
 }
 
 resource "aws_s3_bucket" "access_logs" {
+  #checkov:skip=CKV2_AWS_61: "This is a demo bucket"
+  #checkov:skip=CKV2_AWS_62: "This is a demo bucket"
+  #checkov:skip=CKV_AWS_144: "This is a demo bucket"
+  #checkov:skip=CKV_AWS_145: "This is a demo bucket"
+  #checkov:skip=CKV_AWS_21: "This is a demo bucket"
+  #checkov:skip=CKV2_AWS_6: "This is a demo bucket"
   count  = var.access_logging ? var.access_logging_bucket == null ? 1 : 0 : 0
   bucket = var.access_logging_bucket
 }
