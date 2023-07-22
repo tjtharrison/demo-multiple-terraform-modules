@@ -1,0 +1,4 @@
+{
+  "name": "tjth-ec2-instance",
+  "description": "A terraform module for creating an ec2 instance"
+}
