@@ -8,8 +8,23 @@ permissions:
   contents: write
 
 jobs:
+  generate-matrix:
+    name: Generate matrix
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.get-matrix.outputs.matrix }}
+    steps:
+      - name: Get matrix
+        id: get-matrix
+        uses: hellofresh/action-changed-files@v3
+        with:
+          pattern: modules/(?P<module>[^/]+)
   write-docs:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJson(needs.generate-matrix.outputs.matrix) }}
+    if: ${{ fromJson(needs.generate-matrix.outputs.matrix).include[0] }}
     steps:
       - uses: actions/checkout@v3
         with:
@@ -18,7 +33,7 @@ jobs:
       - name: Render terraform docs inside the README.md and push changes back to PR branch
         uses: terraform-docs/gh-actions@v1.0.0
         with:
-          working-dir: .
+          working-dir: modules/${{ matrix.module }}
           output-file: README.md
           output-method: inject
           git-push: "true"
