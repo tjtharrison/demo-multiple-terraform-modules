@@ -8,3 +8,8 @@ variable "my_ip" {
   description = "The IP address to allow SSH access from"
   type        = string
 }
+
+variable "test-var" {
+  description = "value for test-var"
+  type        = string
+}
