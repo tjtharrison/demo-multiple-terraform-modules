@@ -63,6 +63,7 @@ runs:
     #     user_name: 'Your Name'
     #     user_email: 'your@email.com'
     - name: Write config.subsplit-publish.json
+      shell: bash
       run: |
         echo '{
           "sub-splits": [
