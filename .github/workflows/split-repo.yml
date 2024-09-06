@@ -1,12 +1,6 @@
 name: Split and Push Changes
 
 on:
-  create:
-    tags:
-      - '*'
-  delete:
-    tags:
-      - '*'
   push:
     branches:
       - main
