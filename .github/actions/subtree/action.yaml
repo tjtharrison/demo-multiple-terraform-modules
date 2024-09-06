@@ -69,7 +69,7 @@ runs:
           "sub-splits": [
             {
               "name": "${{ inputs.module }}",
-              "directory": "${{ inputs.module }}",
+              "directory": "${{ inputs.prefix }}",
               "target": "https://github.com/${{ inputs.repo }}.git"
             }
           ]
