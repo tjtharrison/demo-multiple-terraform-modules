@@ -23,17 +23,7 @@ jobs:
       - name: Get modified modules
         id: get-modules
         run: |
-          files=$(git diff-tree --no-commit-id --name-only -r ${{ github.sha }})
-          folders_list="[]"
-
-          for file in $files; do
-            if [[ $file == modules/* ]]; then
-              folder=$(echo "$file" | sed -E 's|^modules/([^/]+)/.*|\1|')
-              folders_list=$(echo "$folders_list" | jq ". += [\"$folder\"]")
-            fi
-          done
-
-          unique_list=$(echo "$folders_list" | jq -c 'unique')
+          folders_list = $(git diff --no-commit-id --name-only -r ${{ github.sha }} -- path modules | xargs dirname | uniq | sed 's#^modules/##' | jq -R . | jq -s .)
           echo "modules=$unique_list" >> $GITHUB_OUTPUT
     outputs:
       modules: ${{ steps.get-modules.outputs.modules }}
