@@ -2,6 +2,7 @@
 resource "aws_instance" "example" {
   #checkov:skip=CKV2_AWS_41: "This is a test instance, role not required"
   #checkov:skip=CKV_AWS_126: "This is a test instance, detailed monitoring not required"
+  #checkov:skip=CKV_AWS_126: "This is a test instance, detailed monitoring not required"
 
   ami           = "ami-0786f5bc3943ad52d"
   instance_type = "t2.micro"
