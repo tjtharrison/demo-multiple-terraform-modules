@@ -8,7 +8,6 @@ resource "aws_s3_bucket_logging" "example" {
 }
 
 resource "aws_s3_bucket" "access_logs" {
-  #checkov:skip=CKV2_AWS_62: "This is a demo bucket"
   #checkov:skip=CKV_AWS_144: "This is a demo bucket"
   #checkov:skip=CKV_AWS_145: "This is a demo bucket"
   #checkov:skip=CKV_AWS_21: "This is a demo bucket"
