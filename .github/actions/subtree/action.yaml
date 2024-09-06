@@ -49,11 +49,39 @@ runs:
         git config --global url."https://api:${{ inputs.github_pat }}@github.com/".insteadOf "https://github.com/"
         git config --unset http."https://github.com/".extraheader
 
-    - name: Push subtree
-      shell: bash
-      run: |
-        set -x
+    # - name: Push subtree
+    #   shell: bash
+    #   run: |
+    #     set -x
 
-        git remote add "${{ inputs.module }}" "https://github.com/${{ inputs.repo }}.git"
-        git subtree add --prefix=${{ inputs.prefix }} "${{ inputs.module }}" "https://github.com/${{ inputs.repo }}.git" subtree-${{ inputs.module }}
-        git subtree push-all
+    #     git remote add "${{ inputs.module }}" "https://github.com/${{ inputs.repo }}.git"
+    #     git subtree add --prefix=${{ inputs.prefix }} "${{ inputs.module }}" "https://github.com/${{ inputs.repo }}.git" subtree-${{ inputs.module }}
+    #     git subtree push-all
+    # - uses: frankdejonge/use-github-token@1.0.1
+    #   with:
+    #     authentication: 'username:${{ secrets.PERSONAL_GITHUB_TOKEN }}'
+    #     user_name: 'Your Name'
+    #     user_email: 'your@email.com'
+    - name: Write config.subsplit-publish.json
+      run: |
+        echo '{
+          "sub-splits": [
+            {
+              "name": "${{ inputs.module }}",
+              "directory": "${{ inputs.module }}",
+              "target": "https://github.com/${{ inputs.repo }}.git"
+            }
+          ]
+        }' > config.subsplit-publish.json
+    - name: Cache splitsh-lite
+      id: splitsh-cache
+      uses: actions/cache@v2
+      with:
+        path: './.splitsh'
+        key: '${{ runner.os }}-splitsh-d-101'
+    - uses: frankdejonge/use-subsplit-publish@1.0.0-beta.6
+      with:
+        source-branch: 'main'
+        config-path: './config.subsplit-publish.json'
+        splitsh-path: './.splitsh/splitsh-lite'
+        splitsh-version: 'v1.0.1'
