@@ -23,7 +23,7 @@ jobs:
       - name: Get modified modules
         id: get-modules
         run: |
-          folders_list = $(git diff --no-commit-id --name-only -r ${{ github.sha }} -- 'modules/*' | xargs -r dirname | uniq | sed 's#^modules/##' | jq -R . | jq -s .)
+          folders_list=$(git diff --no-commit-id --name-only -r ${{ github.sha }} -- 'modules/*' | xargs -r dirname | uniq | sed 's#^modules/##' | jq -R . | jq -s .)
           echo "modules=$unique_list" >> $GITHUB_OUTPUT
     outputs:
       modules: ${{ steps.get-modules.outputs.modules }}
