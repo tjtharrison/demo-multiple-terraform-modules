@@ -40,35 +40,11 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Check if module repository exists and create if needed
-        uses: actions/github-script@v6
-        id: check-repo
-        with:
-          github-token: ${{ secrets.SPLIT_MODULES_GH_TOKEN }}
-          script: |
-            const templateRepoName = 'terraform-module-template'
-            const repoName = `terraform-aws-${{ matrix.module }}`;
-            const org = 'christian-calabrese';
-
-            // Check if the repository exists
-            try {
-              const repo = await github.rest.repos.get({
-                owner: org,
-                repo: repoName
-              });
-              console.log(`Repository ${repoName} exists.`);
-            } catch (error) {
-              if (error.status === 404) {
-                console.log(`Repository ${repoName} does not exist. Please, create it using the ${templateRepoName} template and add it to the PAT allowed repos.`);
-              } else {
-                throw error;
-              }
-            }
       - name: Push module to subrepository
         id: push-to-subrepository
         uses: ./.github/actions/splitsh
         with:
-          repo: christian-calabrese/terraform-aws-${{ matrix.module }}
+          repo: ${{ github.repository_owner }}/terraform-azurerm-${{ matrix.module }}
           prefix: "modules/${{ matrix.module }}"
           module: ${{ matrix.module }}
           github_pat: ${{ secrets.SPLIT_MODULES_GH_TOKEN }}
