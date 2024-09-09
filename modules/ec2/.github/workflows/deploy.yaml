@@ -3,7 +3,7 @@ name: Create Tag from package.json
 on:
   push:
     branches:
-      - main  # Replace 'main' with your default branch, if it's different
+      - main
 
 jobs:
   create_tag:
