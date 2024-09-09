@@ -44,6 +44,7 @@ jobs:
         uses: actions/github-script@v6
         id: check-repo
         with:
+          github-token: ${{ secrets.SPLIT_MODULES_GH_TOKEN }}
           script: |
             const repoName = `terraform-aws-${{ matrix.module }}`;
             const org = 'christian-calabrese';
