@@ -54,7 +54,7 @@ runs:
       shell: bash
       run: |
         echo '{
-          "sub-splits": [
+          "subtree-splits": [
             {
               "name": "${{ inputs.module }}",
               "directory": "${{ inputs.prefix }}",
