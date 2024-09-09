@@ -60,6 +60,9 @@ jobs:
             } catch (error) {
               if (error.status === 404) {
                 console.log(`Repository ${repoName} does not exist. Please, create it using the ${templateRepoName} template and add it to the PAT allowed repos.`);
+              } else {
+                throw error;
+              }
             }
       - name: Push module to subrepository
         id: push-to-subrepository
