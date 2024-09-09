@@ -64,7 +64,7 @@ runs:
         }' > config.subsplit-publish.json
     - uses: frankdejonge/use-subsplit-publish@0001015147267203898034927e8cccad3a7a9aa7 #v1.1.0
       with:
-        source-branch: 'main'
+        source-branch: '${{ github.ref_name }}'
         config-path: './config.subsplit-publish.json'
         splitsh-path: './.splitsh/splitsh-lite'
         splitsh-version: 'v1.0.1'
