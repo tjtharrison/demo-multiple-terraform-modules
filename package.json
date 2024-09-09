@@ -1,4 +1,8 @@
 {
+  "private": true,
+  "workspaces": [
+    "modules/*"
+  ],
   "dependencies": {
     "@changesets/cli": "^2.27.8"
   },
