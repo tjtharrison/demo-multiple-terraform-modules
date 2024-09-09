@@ -58,7 +58,7 @@ runs:
         }' > config.subsplit-publish.json
     - name: Cache splitsh-lite
       id: splitsh-cache
-      uses: actions/cache@0001015147267203898034927e8cccad3a7a9aa7 #v4.0.2
+      uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 #v4.0.2
       with:
         path: './.splitsh'
         key: '${{ runner.os }}-modules-split'
