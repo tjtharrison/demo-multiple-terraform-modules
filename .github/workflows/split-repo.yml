@@ -46,6 +46,7 @@ jobs:
         with:
           github-token: ${{ secrets.SPLIT_MODULES_GH_TOKEN }}
           script: |
+            const templateRepoName = 'terraform-module-template'
             const repoName = `terraform-aws-${{ matrix.module }}`;
             const org = 'christian-calabrese';
 
@@ -61,9 +62,11 @@ jobs:
                 console.log(`Repository ${repoName} does not exist. Creating it now.`);
                 
                 // Create the repository
-                await github.rest.repos.createInOrg({
-                  org,
+                github.rest.repos.createUsingTemplate({
+                  template_owner: org,
+                  template_repo: templateRepoName,
                   name: repoName,
+                  owner: org,
                   private: true
                 });
                 console.log(`Repository ${repoName} created.`);
@@ -71,7 +74,6 @@ jobs:
                 throw error;
               }
             }
-  
       - name: Push module to subrepository
         id: push-to-subrepository
         uses: ./.github/actions/splitsh
