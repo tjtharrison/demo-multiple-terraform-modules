@@ -13,7 +13,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
 
-      # Extract the version from package.json using jq
+      # Extract the version from package.json
       - name: Extract version from package.json
         id: get_version
         run: |
