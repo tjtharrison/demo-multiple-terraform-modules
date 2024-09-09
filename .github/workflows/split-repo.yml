@@ -59,20 +59,7 @@ jobs:
               console.log(`Repository ${repoName} exists.`);
             } catch (error) {
               if (error.status === 404) {
-                console.log(`Repository ${repoName} does not exist. Creating it now.`);
-                
-                // Create the repository
-                github.rest.repos.createUsingTemplate({
-                  template_owner: org,
-                  template_repo: templateRepoName,
-                  name: repoName,
-                  owner: org,
-                  private: true
-                });
-                console.log(`Repository ${repoName} created.`);
-              } else {
-                throw error;
-              }
+                console.log(`Repository ${repoName} does not exist. Please, create it using the ${templateRepoName} template and add it to the PAT allowed repos.`);
             }
       - name: Push module to subrepository
         id: push-to-subrepository
