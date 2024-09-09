@@ -77,7 +77,15 @@ if [ -n "$ORG_NAME" ]; then
   gh repo create "$ORG_NAME/$SUBREPO_NAME" --public --confirm
 
   if [ $? -eq 0 ]; then
-    echo "GitHub repository created successfully: https://github.com/$ORG_NAME/$SUBREPO_NAME"
+    echo "GitHub repository created successfully: https://github.com/$ORG_NAME/$SUBREPO_NAME"ù    # Initialize Git in the module directory and push to the new repository
+    cd "$MODULE_DIR"
+    git init
+    git add .
+    git commit -m "Initial commit for module $MODULE_NAME"
+    git branch -M main
+    git remote add origin "https://github.com/$ORG_NAME/$SUBREPO_NAME.git"
+    git push -u origin main
+    rm -rf .git
   else
     echo "Error: Failed to create GitHub repository."
     exit 1
