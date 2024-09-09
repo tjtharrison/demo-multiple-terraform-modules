@@ -24,7 +24,7 @@ jobs:
         id: get-modules
         run: |
           folders_list=$(git diff --no-commit-id --name-only HEAD~1 modules | xargs -r dirname | uniq | sed 's#^modules/##' | jq -R -c . | jq -s -c .)
-          echo $folders_list
+          echo Modules that have changed: $folders_list
           echo "modules=$folders_list" >> $GITHUB_OUTPUT
     outputs:
       modules: ${{ steps.get-modules.outputs.modules }}
@@ -72,9 +72,9 @@ jobs:
               }
             }
   
-      - name: Run subtree action
-        id: subtree-action
-        uses: ./.github/actions/subtree
+      - name: Push module to subrepository
+        id: push-to-subrepository
+        uses: ./.github/actions/splitsh
         with:
           repo: christian-calabrese/terraform-aws-${{ matrix.module }}
           prefix: "modules/${{ matrix.module }}"

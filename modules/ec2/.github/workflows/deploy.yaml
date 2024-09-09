@@ -1,0 +1,45 @@
+name: Create Tag from package.json
+
+on:
+  push:
+    branches:
+      - main  # Replace 'main' with your default branch, if it's different
+
+jobs:
+  create_tag:
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout the repository
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      # Extract the version from package.json using jq
+      - name: Extract version from package.json
+        id: get_version
+        run: |
+          version=$(jq -r '.version' package.json)
+          echo "VERSION=$version" >> $GITHUB_ENV
+
+      # Check if the tag already exists
+      - name: Check if tag exists
+        id: tag_check
+        run: |
+          if git rev-parse "${{ env.VERSION }}" >/dev/null 2>&1; then
+            echo "Tag already exists"
+            echo "TAG_EXISTS=true" >> $GITHUB_ENV
+          else
+            echo "TAG_EXISTS=false" >> $GITHUB_ENV
+
+      # Create a new tag if it doesn't exist
+      - name: Create Git Tag
+        if: env.TAG_EXISTS == 'false'
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git tag "${{ env.VERSION }}"
+          git push origin "${{ env.VERSION }}"
+
+      # Output message if the tag exists
+      - name: Tag already exists message
+        if: env.TAG_EXISTS == 'true'
+        run: echo "Tag ${{ env.VERSION }} already exists. Skipping tag creation."

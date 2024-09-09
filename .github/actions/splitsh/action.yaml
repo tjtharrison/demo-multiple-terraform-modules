@@ -1,5 +1,5 @@
-name: "Subtree action"
-description: "Execute the git subtree action in a protected environment"
+name: "Push module to subrepository"
+description: "Push module to subrepository"
 
 inputs:
   git_name:
@@ -44,6 +44,12 @@ runs:
         # Configure Git for authentication
         git config --global url."https://api:${{ inputs.github_pat }}@github.com/".insteadOf "https://github.com/"
         git config --unset http."https://github.com/".extraheader
+    - name: Cache splitsh-lite
+      id: splitsh-cache
+      uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 #v4.0.2
+      with:
+        path: './.splitsh'
+        key: '${{ runner.os }}-modules-split'
     - name: Write config.subsplit-publish.json
       shell: bash
       run: |
@@ -56,12 +62,6 @@ runs:
             }
           ]
         }' > config.subsplit-publish.json
-    - name: Cache splitsh-lite
-      id: splitsh-cache
-      uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 #v4.0.2
-      with:
-        path: './.splitsh'
-        key: '${{ runner.os }}-modules-split'
     - uses: frankdejonge/use-subsplit-publish@0001015147267203898034927e8cccad3a7a9aa7 #v1.1.0
       with:
         source-branch: 'main'

@@ -1,0 +1,17 @@
+name: Setup Node.JS
+description: Setup Node.JS
+
+inputs:
+  package_manager:
+    description: 'The package manager to use'
+    default: 'npm'
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Setup node
+      uses: actions/setup-node@e33196f7422957bea03ed53f6fbb155025ffc7b8 # v3.7.0
+      with:
+        node-version-file: '.node-version'
+        cache: ${{ inputs.package_manager }}
