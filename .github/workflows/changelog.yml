@@ -36,5 +36,5 @@ jobs:
           commit: "Update CHANGELOG and prepare next release"
           title: "Push next releases"
           createGithubReleases: false
-        # env:
-        #   GITHUB_TOKEN: ${{ secrets.TAG_GITHUB_PAT }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.SPLIT_MODULES_GH_TOKEN }}
