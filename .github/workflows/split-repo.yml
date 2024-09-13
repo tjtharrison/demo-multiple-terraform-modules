@@ -78,7 +78,7 @@ jobs:
           git merge --allow-unrelated-histories ${MODULE_NAME}-branch
           
           # Define the tag name
-          TAG_NAME=$(jq -r '.version' infra/modules/package.json)
+          TAG_NAME=$(jq -r '.version' infra/modules/${MODULE_NAME}/package.json)
 
           # Check if the tag exists on the remote
           if git ls-remote --tags module-repo | grep "refs/tags/$TAG_NAME" >/dev/null 2>&1; then
