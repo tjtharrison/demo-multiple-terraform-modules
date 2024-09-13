@@ -78,7 +78,7 @@ jobs:
           # Pusha tutti i tag del modulo
           git tag -l "module-${MODULE_NAME}-v*" | xargs -I {} git push module-repo {}:{}
           # Pulisci i branch temporanei
-          git branch -D temp-branch ${MODULE_NAME}-branch
+          git branch -D ${MODULE_NAME}-branch
       # - name: Push module to subrepository
       #   id: push-to-subrepository
       #   uses: ./.github/actions/splitsh
