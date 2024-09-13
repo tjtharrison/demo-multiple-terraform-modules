@@ -1,5 +1,0 @@
----
-"cosmosdb": major
----
-
-First major
