@@ -1,4 +1,4 @@
-name: Split and Push Changes
+name: Push modules to subrepo
 
 on:
   push:
@@ -40,11 +40,37 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Push module to subrepository
-        id: push-to-subrepository
-        uses: ./.github/actions/splitsh
-        with:
-          repo: ${{ github.repository_owner }}/terraform-azurerm-${{ matrix.module }}
-          prefix: "modules/${{ matrix.module }}"
-          module: ${{ matrix.module }}
-          github_pat: ${{ secrets.SPLIT_MODULES_GH_TOKEN }}
+            # Extract the version from package.json
+      - name: Extract version from package.json
+        id: get_version
+        run: |
+          version=$(jq -r '.version' package.json)
+          echo "VERSION=$version" >> $GITHUB_ENV
+      - name: Push Subtree to Module Repo
+        env:
+          MODULE_NAME: ${{ matrix.module }}
+          MODULE_VERSION: ${{ steps.get_version.outputs.module_version }}
+          REPO_URL: ${{ github.repository_owner }}/terraform-azurerm-${{ matrix.module }}
+        run: |
+          git remote add module-repo "$REPO_URL"
+          # Estrai la cronologia completa del modulo
+          git subtree split --prefix=infra/modules/${MODULE_NAME} -b ${MODULE_NAME}-branch
+          # Controlla se il branch esiste già nel repository di destinazione
+          git fetch module-repo main
+          # Unisci le modifiche senza sovrascrivere la cronologia
+          git checkout -b temp-branch module-repo/main
+          git merge --allow-unrelated-histories ${MODULE_NAME}-branch
+          # Pusha le modifiche senza forzare
+          git push module-repo temp-branch:main
+          # Pusha tutti i tag del modulo
+          git tag -l "module-${MODULE_NAME}-v*" | xargs -I {} git push module-repo {}:{}
+          # Pulisci i branch temporanei
+          git branch -D temp-branch ${MODULE_NAME}-branch
+      # - name: Push module to subrepository
+      #   id: push-to-subrepository
+      #   uses: ./.github/actions/splitsh
+      #   with:
+      #     repo: ${{ github.repository_owner }}/terraform-azurerm-${{ matrix.module }}
+      #     prefix: "infra/modules/${{ matrix.module }}"
+      #     module: ${{ matrix.module }}
+      #     github_pat: ${{ secrets.SPLIT_MODULES_GH_TOKEN }}

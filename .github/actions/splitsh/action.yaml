@@ -54,7 +54,7 @@ runs:
       shell: bash
       run: |
         echo '{
-          "subtree-splits": [
+          "sub-splits": [
             {
               "name": "${{ inputs.module }}",
               "directory": "${{ inputs.prefix }}",
@@ -62,13 +62,9 @@ runs:
             }
           ]
         }' > config.subsplit-publish.json
-    - name: subtree split
-      uses: acrobat/subtree-splitter@v1.1.3
+    - uses: frankdejonge/use-subsplit-publish@0001015147267203898034927e8cccad3a7a9aa7 #v1.1.0
       with:
-          config-path: './config.subsplit-publish.json' 
-    # - uses: frankdejonge/use-subsplit-publish@0001015147267203898034927e8cccad3a7a9aa7 #v1.1.0
-    #   with:
-    #     source-branch: 'main'
-    #     config-path: './config.subsplit-publish.json'
-    #     splitsh-path: './.splitsh/splitsh-lite'
-    #     splitsh-version: 'v1.0.1'
+        source-branch: 'main'
+        config-path: './config.subsplit-publish.json'
+        splitsh-path: './.splitsh/splitsh-lite'
+        splitsh-version: 'v1.0.1'
