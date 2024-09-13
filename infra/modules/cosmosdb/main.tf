@@ -1,3 +1,3 @@
 locals {
-    very_good_major = false
+    very_good_major = true
 }
