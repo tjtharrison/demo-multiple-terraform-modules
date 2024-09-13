@@ -50,7 +50,7 @@ jobs:
         env:
           MODULE_NAME: ${{ matrix.module }}
           MODULE_VERSION: ${{ steps.get_version.outputs.module_version }}
-          REPO_URL: ${{ github.repository_owner }}/terraform-azurerm-${{ matrix.module }}
+          REPO_URL: git@github.com:${{ github.repository_owner }}/terraform-azurerm-${{ matrix.module }}.git
         run: |
           git remote add module-repo "$REPO_URL"
           # Estrai la cronologia completa del modulo

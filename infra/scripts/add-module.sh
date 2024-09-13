@@ -83,8 +83,8 @@ if [ -n "$ORG_NAME" ]; then
     git remote add origin git@github.com:$ORG_NAME/$SUBREPO_NAME.git
     git add .
     git commit -m "Initial commit for module $MODULE_NAME"
-    git branch -M dummy
-    git push -u origin dummy
+    git branch -M main
+    git push -u origin main
     rm -rf .git
   else
     echo "Error: Failed to create GitHub repository."
