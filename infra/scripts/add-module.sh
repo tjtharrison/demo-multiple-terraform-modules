@@ -23,7 +23,7 @@ if [ -z "$MODULE_NAME" ]; then
 fi
 
 SUBREPO_NAME="terraform-azurerm-$MODULE_NAME"
-MODULE_DIR="infra/modules/$MODULE_NAME"
+MODULE_DIR="modules/$MODULE_NAME"
 ASSETS_DIR="$(dirname "$0")/scaffolding"
 
 # Check if the module directory already exists
