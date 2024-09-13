@@ -79,6 +79,7 @@ jobs:
           
           # Define the tag name
           echo $PWD
+          echo $(ls)
           TAG_NAME=$(jq -r '.version' infra/modules/${MODULE_NAME}/package.json)
 
           # Check if the tag exists on the remote
