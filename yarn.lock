@@ -270,6 +270,10 @@ ansi-regex@^5.0.1:
   resolved "https://registry.npmjs.org/ansi-regex/-/ansi-regex-5.0.1.tgz"
   integrity sha512-quJQXlTSUGL2LH9SUXo8VwsY4soanhgo6LNSm84E1LBcE8s3O0wpdiRzyR9z/ZZJMlMWv37qOOb9pdJlMUEKFQ==
 
+"app_service@file:/Users/lap-mbp16-n01-0366/Desktop/pers/terraform-aws-v3/infra/modules/app_service":
+  version "0.0.1"
+  resolved "file:infra/modules/app_service"
+
 argparse@^1.0.7:
   version "1.0.10"
   resolved "https://registry.npmjs.org/argparse/-/argparse-1.0.10.tgz"
@@ -281,6 +285,10 @@ array-union@^2.1.0:
   version "2.1.0"
   resolved "https://registry.npmjs.org/array-union/-/array-union-2.1.0.tgz"
   integrity sha512-HGyxoOTYUyCM6stUe6EJgnd4EoewAI7zMdfqO+kGjnlZmBDz/cR5pf8r/cR4Wq60sL/p0IkcjUEEPwS3GFrIyw==
+
+"azure_role_assignments@file:/Users/lap-mbp16-n01-0366/Desktop/pers/terraform-aws-v3/infra/modules/azure_role_assignments":
+  version "0.0.1"
+  resolved "file:infra/modules/azure_role_assignments"
 
 better-path-resolve@1.0.0:
   version "1.0.0"
@@ -306,6 +314,14 @@ ci-info@^3.7.0:
   resolved "https://registry.npmjs.org/ci-info/-/ci-info-3.9.0.tgz"
   integrity sha512-NIxF55hv4nSqQswkAeiOi1r83xy8JldOFDTWiug55KBu9Jnblncd2U6ViHmYgHf01TPZS77NJBhBMKdWj9HQMQ==
 
+"container_app@file:/Users/lap-mbp16-n01-0366/Desktop/pers/terraform-aws-v3/infra/modules/container_app":
+  version "0.0.1"
+  resolved "file:infra/modules/container_app"
+
+"cosmosdb@file:/Users/lap-mbp16-n01-0366/Desktop/pers/terraform-aws-v3/infra/modules/cosmosdb":
+  version "0.0.1"
+  resolved "file:infra/modules/cosmosdb"
+
 cross-spawn@^5.1.0:
   version "5.1.0"
   resolved "https://registry.npmjs.org/cross-spawn/-/cross-spawn-5.1.0.tgz"
@@ -326,6 +342,10 @@ dir-glob@^3.0.1:
   integrity sha512-WkrWp9GR4KXfKGYzOLmTuGVi1UWFfws377n9cc55/tb6DuqyF6pcQ5AbiHEshaDpY9v6oaSr2XCDidGmMwdzIA==
   dependencies:
     path-type "^4.0.0"
+
+"ec2@file:/Users/lap-mbp16-n01-0366/Desktop/pers/terraform-aws-v3/infra/modules/ec2":
+  version "0.1.0"
+  resolved "file:infra/modules/ec2"
 
 enquirer@^2.3.0:
   version "2.4.1"
@@ -651,6 +671,14 @@ run-parallel@^1.1.9:
   dependencies:
     queue-microtask "^1.2.2"
 
+"s3-enh@file:/Users/lap-mbp16-n01-0366/Desktop/pers/terraform-aws-v3/infra/modules/s3-enh":
+  version "0.0.0"
+  resolved "file:infra/modules/s3-enh"
+
+"s3@file:/Users/lap-mbp16-n01-0366/Desktop/pers/terraform-aws-v3/infra/modules/s3":
+  version "0.1.0"
+  resolved "file:infra/modules/s3"
+
 "safer-buffer@>= 2.1.2 < 3":
   version "2.1.2"
   resolved "https://registry.npmjs.org/safer-buffer/-/safer-buffer-2.1.2.tgz"
@@ -712,6 +740,18 @@ term-size@^2.1.0:
   version "2.2.1"
   resolved "https://registry.npmjs.org/term-size/-/term-size-2.2.1.tgz"
   integrity sha512-wK0Ri4fOGjv/XPy8SBHZChl8CM7uMc5VML7SqiQ0zG7+J5Vr+RMQDoHa2CNT6KHUnTGIXH34UDMkPzAUyapBZg==
+
+"tes@file:/Users/lap-mbp16-n01-0366/Desktop/pers/terraform-aws-v3/infra/modules/tes":
+  version "0.0.1"
+  resolved "file:infra/modules/tes"
+
+"testmodule@file:/Users/lap-mbp16-n01-0366/Desktop/pers/terraform-aws-v3/infra/modules/testmodule":
+  version "0.0.1"
+  resolved "file:infra/modules/testmodule"
+
+"teszt@file:/Users/lap-mbp16-n01-0366/Desktop/pers/terraform-aws-v3/infra/modules/teszt":
+  version "0.0.1"
+  resolved "file:infra/modules/teszt"
 
 tmp@^0.0.33:
   version "0.0.33"
