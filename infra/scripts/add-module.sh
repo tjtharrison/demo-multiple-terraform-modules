@@ -24,7 +24,6 @@ fi
 
 SUBREPO_NAME="terraform-azurerm-$MODULE_NAME"
 MODULE_DIR="modules/$MODULE_NAME"
-ASSETS_DIR="$(dirname "$0")/scaffolding"
 
 # Check if the module directory already exists
 if [ -d "$MODULE_DIR" ]; then
@@ -34,15 +33,6 @@ fi
 
 # Create the module directory
 mkdir -p "$MODULE_DIR"
-
-# Check if the assets directory exists
-if [ ! -d "$ASSETS_DIR" ]; then
-  echo "Error: Assets directory '$ASSETS_DIR' not found."
-  exit 1
-fi
-
-# Copy contents of the assets folder into the new module directory
-cp -r "$ASSETS_DIR/" "$MODULE_DIR/"
 
 # Create package.json file in the module directory
 PACKAGE_JSON="$MODULE_DIR/package.json"

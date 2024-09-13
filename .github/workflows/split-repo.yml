@@ -78,8 +78,6 @@ jobs:
           git merge --allow-unrelated-histories ${MODULE_NAME}-branch
           
           # Define the tag name
-          echo $PWD
-          echo $(ls)
           TAG_NAME=$(jq -r '.version' package.json)
 
           # Check if the tag exists on the remote
