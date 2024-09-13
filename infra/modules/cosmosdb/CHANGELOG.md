@@ -1,5 +1,11 @@
 # cosmosdb
 
+## 2.1.0
+
+### Minor Changes
+
+- 93f6d2d: New feature!
+
 ## 2.0.0
 
 ### Major Changes

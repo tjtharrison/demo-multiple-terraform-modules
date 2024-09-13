@@ -1,5 +1,0 @@
----
-"cosmosdb": minor
----
-
-New feature!
