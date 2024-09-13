@@ -1,5 +1,11 @@
 # cosmosdb
 
+## 2.0.0
+
+### Major Changes
+
+- 8c3fc1d: Set it to true!
+
 ## 1.1.0
 
 ### Minor Changes

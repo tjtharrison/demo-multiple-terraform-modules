@@ -319,7 +319,7 @@ ci-info@^3.7.0:
   resolved "file:infra/modules/container_app"
 
 "cosmosdb@file:/home/runner/work/terraform-aws-v3/terraform-aws-v3/infra/modules/cosmosdb":
-  version "1.1.0"
+  version "2.0.0"
   resolved "file:infra/modules/cosmosdb"
 
 cross-spawn@^5.1.0:
