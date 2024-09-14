@@ -40,62 +40,10 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-            # Extract the version from package.json
-      - name: Extract version from package.json
-        id: get_version
-        run: |
-          version=$(jq -r '.version' package.json)
-          echo "VERSION=$version" >> $GITHUB_ENV
-      - name: Setup git for subtree
-        shell: bash
-        run: |
-          # Fix dubious ownership
-          git config --global --add safe.directory /github/workspace
-  
-          # Set git email and name
-          git config --global user.email "actions@github.com"
-          git config --global user.name "GitHub Actions"
-  
-          # Configure Git for authentication
-          git config --global url."https://api:${{ secrets.SPLIT_MODULES_GH_TOKEN }}@github.com/".insteadOf "https://github.com/"
-          git config --unset http."https://github.com/".extraheader
-      - name: Push Subtree to Module Repo
-        env:
-          MODULE_NAME: ${{ matrix.module }}
-          MODULE_VERSION: ${{ steps.get_version.outputs.module_version }}
-          REPO_URL: https://github.com/${{ github.repository_owner }}/terraform-azurerm-${{ matrix.module }}.git
-        run: |
-          git remote add module-repo "$REPO_URL"
-
-          # Estrai la cronologia completa del modulo
-          git subtree split --prefix=infra/modules/${MODULE_NAME} -b ${MODULE_NAME}-branch
-
-          # Controlla se il branch esiste già nel repository di destinazione
-          git fetch module-repo main --tags
-
-          # Unisci le modifiche senza sovrascrivere la cronologia
-          git checkout -b temp-branch module-repo/main
-          git merge --allow-unrelated-histories ${MODULE_NAME}-branch
-          
-          # Define the tag name
-          TAG_NAME=$(jq -r '.version' package.json)
-
-          # Check if the tag exists on the remote
-          if git ls-remote --tags module-repo | grep "refs/tags/$TAG_NAME" >/dev/null 2>&1; then
-            echo "Tag $TAG_NAME already exists on the remote."
-          else
-            echo "Tag $TAG_NAME does not exist on the remote. Creating and pushing the tag..."
-            # Create the tag locally
-            git tag "$TAG_NAME"
-            # Push the tag to the remote
-            git push module-repo "$TAG_NAME"
-          fi
-
-          # Pusha le modifiche senza forzare
-          git push module-repo temp-branch:main --tags
-
-          # Push all tags
-          # git tag -l "module-${MODULE_NAME}-v*" | xargs -I {} git push module-repo {}:{}
-
-          # Clean the temporary branch
-          git branch -D ${MODULE_NAME}-branch
+      - name: Push module to subrepository
+        id: push-to-subrepository
+        uses: ./.github/actions/push-module
+        with:
+          repo: ${{ github.repository_owner }}/terraform-azurerm-${{ matrix.module }}
+          module: ${{ matrix.module }}
+          github_pat: ${{ secrets.SPLIT_MODULES_GH_TOKEN }}
